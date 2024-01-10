@@ -29,6 +29,7 @@ Feature: feature for testing a graphQL application to retrieve account details
     |id |
     |101|
     |102|
+    |103|
 
   Scenario Outline: #get account details based on ID for national
     * def JwtCreationClass = Java.type('demo.JwtCreation')
@@ -55,6 +56,7 @@ Feature: feature for testing a graphQL application to retrieve account details
       |id |
       |101|
       |102|
+      |103|
 
 
 
