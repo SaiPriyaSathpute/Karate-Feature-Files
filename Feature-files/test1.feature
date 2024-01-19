@@ -22,7 +22,8 @@ Feature: feature for testing a graphQL application to retrieve account details
     }
     }
     """
-    Given request { query: '#(query)' }
+    Given url baseUrl
+    And request { query: '#(query)' }
     When method Post
     Then status 200
     And match response.data.getAccountById.accountId == <id>
@@ -48,7 +49,8 @@ Feature: feature for testing a graphQL application to retrieve account details
     }
     }
     """
-    Given request { query: '#(query)' }
+    Given url baseUrl
+    And request { query: '#(query)' }
     When method Post
     Then status 200
     And match response.data.getAccountById.accountId == <id>
