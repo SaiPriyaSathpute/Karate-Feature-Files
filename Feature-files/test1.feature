@@ -1,16 +1,14 @@
-
-Feature: feature for testing a graphQL application to retrieve account details
+Feature: feature for testing a GraphQL application to retrieve account details
 
   Background:
     * def baseUrl = karate.properties['baseUrl']
-    * url baseUrl
     * configure proxy = karate.properties['proxyUrl']
 
   Scenario Outline: #get account details based on ID for regional
     * def JwtCreationClass = Java.type('demo.JwtCreation')
     * def JwtObject = new JwtCreationClass()
     * def JwtToken = JwtObject.jwtToken("regional");
-    * karate.configure('headers',{authorization : 'Bearer '+JwtToken })
+    * karate.configure('headers', { authorization: 'Bearer ' + JwtToken })
     * text query =
     """
     query{
@@ -22,22 +20,20 @@ Feature: feature for testing a graphQL application to retrieve account details
     }
     }
     """
-    Given url baseUrl
+    Given url ' '  # Clear any previously set URL
     And request { query: '#(query)' }
     When method Post
     Then status 200
     And match response.data.getAccountById.accountId == <id>
 
     Examples:
-    |id |
-    |101|
-    |102|
+      | id |
+      | 101 |
+      | 102 |
 
   Scenario Outline: #get account details based on ID for national
-    * def JwtCreationClass = Java.type('demo.JwtCreation')
-    * def JwtObject = new JwtCreationClass()
     * def JwtToken = JwtObject.jwtToken("national");
-    * karate.configure('headers',{authorization : 'Bearer '+JwtToken })
+    * karate.configure('headers', { authorization: 'Bearer ' + JwtToken })
     * text query =
     """
     query{
@@ -49,16 +45,13 @@ Feature: feature for testing a graphQL application to retrieve account details
     }
     }
     """
-    Given url baseUrl
+    Given url ' '  # Clear any previously set URL
     And request { query: '#(query)' }
     When method Post
     Then status 200
     And match response.data.getAccountById.accountId == <id>
 
     Examples:
-      |id |
-      |101|
-      |102|
-
-
-
+      | id |
+      | 101 |
+      | 102 |
