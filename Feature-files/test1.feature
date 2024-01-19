@@ -2,7 +2,7 @@
 Feature: feature for testing a graphQL application to retrieve account details
 
   Background:
-#    * configure baseUrl = karate.properties['baseUrl']
+    * configure baseUrl = karate.properties['baseUrl']
     * configure proxy = karate.properties['proxyUrl']
 
   Scenario Outline: #get account details based on ID for regional
