@@ -1,8 +1,7 @@
 Feature: feature for testing a GraphQL application to retrieve account details
 
   Background:
-    * def baseUrl = karate.properties['baseUrl']
-    * configure proxy = karate.properties['proxyUrl']
+    * url baseUrl
 
   Scenario Outline: #get account details based on ID for regional
     * def JwtCreationClass = Java.type('demo.JwtCreation')
@@ -20,18 +19,19 @@ Feature: feature for testing a GraphQL application to retrieve account details
     }
     }
     """
-    Given url ' '  # Clear any previously set URL
-    And request { query: '#(query)' }
+    Given request { query: '#(query)' }
     When method Post
     Then status 200
     And match response.data.getAccountById.accountId == <id>
 
     Examples:
-      | id |
+      | id  |
       | 101 |
       | 102 |
 
   Scenario Outline: #get account details based on ID for national
+    * def JwtCreationClass = Java.type('demo.JwtCreation')
+    * def JwtObject = new JwtCreationClass()
     * def JwtToken = JwtObject.jwtToken("national");
     * karate.configure('headers', { authorization: 'Bearer ' + JwtToken })
     * text query =
@@ -45,13 +45,12 @@ Feature: feature for testing a GraphQL application to retrieve account details
     }
     }
     """
-    Given url ' '  # Clear any previously set URL
-    And request { query: '#(query)' }
+    Given request { query: '#(query)' }
     When method Post
     Then status 200
     And match response.data.getAccountById.accountId == <id>
 
     Examples:
-      | id |
+      | id  |
       | 101 |
       | 102 |
