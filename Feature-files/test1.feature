@@ -2,7 +2,7 @@
 Feature: feature for testing a graphQL application to retrieve account details
 
   Background:
-    * configure baseUrl = karate.properties['baseUrl']
+    * def baseUrl = karate.properties['baseUrl']
     * url baseUrl
     * configure proxy = karate.properties['proxyUrl']
 
