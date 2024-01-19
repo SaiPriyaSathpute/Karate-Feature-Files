@@ -2,9 +2,11 @@
 Feature: feature for testing a graphQL application to retrieve account details
 
   Background:
-    * url 'http://localhost:3000/graphql'
+#    * configure baseUrl = karate.properties['baseUrl']
+    * configure proxy = karate.properties['proxyUrl']
 
   Scenario Outline: #get account details based on ID for regional
+    Given url '/graphql'
     * def JwtCreationClass = Java.type('demo.JwtCreation')
     * def JwtObject = new JwtCreationClass()
     * def JwtToken = JwtObject.jwtToken("regional");
