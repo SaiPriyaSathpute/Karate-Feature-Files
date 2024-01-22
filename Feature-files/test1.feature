@@ -1,7 +1,7 @@
 Feature: feature for testing a GraphQL application to retrieve account details
 
   Background:
-    * url karate.properties['baseUrl']
+    * url 'http://localhost:3000/graphql'
 
   Scenario Outline: #get account details based on ID for regional
     * def JwtCreationClass = Java.type('demo.JwtCreation')
